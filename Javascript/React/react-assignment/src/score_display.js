@@ -2,13 +2,23 @@ import React from 'react';
 import ReactDom from 'react-dom';
 
 /*
-ScoreCards for to display current score and information about past rounds
+Scorecard, props.value = win : lose
 */
-
-export default class ScoreBoard extends React.Component{
-
+function Scorecard(props){
+    if(props.outcome === "win"){
+        return(
+            <li className ="scorecardWon" >
+                You won!
+            </li>);
+        }else if(props.outcome==="lose"){
+        return(
+            <li className="scorecardLost">
+                You lost!
+            </li>);
+    }
+    return(<></>);
 }
 
-class ScoreCard extends React.Component{
+export default class ScoreBoard extends React.Component{
 
 }
