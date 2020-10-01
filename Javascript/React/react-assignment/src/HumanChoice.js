@@ -4,17 +4,17 @@ import ReactDOM from 'react-dom';
 const options = [
     {
       emoji: '✊',
-      name: 'rock',
+      name: 'sten',
       id: 1
     },
     {
-      emoji: '✋',
-      name: 'paper',
-      id: 2,
+      emoji: '✌',
+      name: 'sax',
+      id: 2
     },
     {
-      emoji: '✌',
-      name: 'scissor',
+      emoji: '✋',
+      name: 'påse',
       id: 3
     }
 ];
@@ -29,14 +29,14 @@ export default function GenerateButtons({optionParentCallback}){
   }
 
   return(
-    <div>
-        <div>Current: {option}</div>
+    <div className="HumanChoice">
+        <div>Ditt val: {option}</div>
         {options.map(option => (
           <div key={option.name}>
             <div className="option">
               <span role="img" aria-label={option.name}>{option.emoji}</span>
             </div>
-            <button onClick={() => chooseOption(option)}>pick</button>
+            <button onClick={() => chooseOption(option)}>Välj</button>
           </div>
         ))}
     </div>)
