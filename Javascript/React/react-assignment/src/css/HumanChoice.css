@@ -1,0 +1,18 @@
+.human-choice { 
+    position: fixed;
+    left: 150px;
+    top: 200px;
+    text-align: center;
+}
+
+
+.human-options {
+background-color: green;
+position: fixed;
+top: 150px;
+left: 50px;
+}
+
+.human-emojis{
+    font-size: x-large;
+}

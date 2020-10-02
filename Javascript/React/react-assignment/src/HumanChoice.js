@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import './css/HumanChoice.css';
 
 const options = [
     {
@@ -28,16 +28,30 @@ export default function GenerateButtons({optionParentCallback}){
     // optionParentCallback(option.name); // callback to parent hook
   }
 
+  function ifChosen(option){
+    if(option === 0){
+      return (<p>Ditt val: ej valt</p>)
+    }
+    else{
+      return (<p>Ditt val: {option}</p>)
+    }
+
+  }
+
   return(
-    <div className="HumanChoice">
-        <div>Ditt val: {option}</div>
+    <div className="human-choice">
+    <div>{ifChosen(option)}</div>
+
+        <div className="human-options">
         {options.map(option => (
           <div key={option.name}>
-            <div className="option">
+            <div className="human-emojis">
               <span role="img" aria-label={option.name}>{option.emoji}</span>
             </div>
             <button onClick={() => chooseOption(option)}>Välj</button>
           </div>
         ))}
+        </div>
+
     </div>)
 }

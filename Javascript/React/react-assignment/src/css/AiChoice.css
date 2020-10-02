@@ -1,0 +1,18 @@
+.AI-choice{
+    position: fixed;
+    right: 150px;
+    top: 200px;
+    text-align: center;
+}
+
+.AI-options {
+    background-color:red;
+    position: fixed;
+    top: 150px;
+    right: 50px;
+}
+
+.AI-emojis{
+    font-size: x-large;
+    padding: 10px;
+}

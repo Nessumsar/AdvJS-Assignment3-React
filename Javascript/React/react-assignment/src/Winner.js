@@ -1,5 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import './css/Winner.css';
 
 
 //Räknar antal omgångar och poäng
+
+const Winner = (props) => {
+    
+
+    return(<p>Winner-component</p>)
+}
+
+
+export default Winner;
