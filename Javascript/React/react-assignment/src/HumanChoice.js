@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './css/HumanChoice.css';
 
 const options = [
@@ -19,13 +19,13 @@ const options = [
     }
 ];
 
-export default function GenerateButtons({optionParentCallback}){
-  
-  const [option, setOption] = useState(0);
+export default function GenerateButtons(props){
+  const [option, setOption] = useState("0");
+  handleChange = handleChange.bind(this);
 
-  function chooseOption(option) {
+  function handleChange(option) {
     setOption(option.name);
-    // optionParentCallback(option.name); // callback to parent hook
+    props.getPlayerChoice(option.name);
   }
 
   function ifChosen(option){
@@ -48,7 +48,7 @@ export default function GenerateButtons({optionParentCallback}){
             <div className="human-emojis">
               <span role="img" aria-label={option.name}>{option.emoji}</span>
             </div>
-            <button onClick={() => chooseOption(option)}>Välj</button>
+            <button onClick={() => handleChange(option)}>Välj</button>
           </div>
         ))}
         </div>
