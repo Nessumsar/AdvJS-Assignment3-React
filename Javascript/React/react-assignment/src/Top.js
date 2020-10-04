@@ -27,7 +27,9 @@ const TopComponent = (props) => {
     function startGame(event){
         event.preventDefault();
         console.log({rounds});
+
         props.getRounds(rounds);
+       
         countTime();
         startRounds({rounds});
     }
