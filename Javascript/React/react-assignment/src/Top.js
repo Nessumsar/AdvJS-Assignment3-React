@@ -1,7 +1,6 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/Top.css';
-import {useState} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 //Antal set
 //Start
@@ -9,7 +8,7 @@ import {useState} from 'react';
 
 
 const TopComponent = (props) => {
-    const [rounds, setRounds] = useState(0);
+    const [rounds, setRounds] = useState("0");
 
 
     function countTime(){
@@ -27,9 +26,8 @@ const TopComponent = (props) => {
     //wip
     function startGame(event){
         event.preventDefault();
-        console.log({rounds})
-
-
+        console.log({rounds});
+        props.getRounds(rounds);
         countTime();
         startRounds({rounds});
     }

@@ -12,11 +12,17 @@ function App() {
   const getPlayerChoice = useCallback( (updatedPlayerChoice) => {
     setPlayerChoice(updatedPlayerChoice);
   }, []);
+  
+  const [Rounds, setRounds] = useState("");
+  const getRounds = useCallback( (updatedRounds) => {
+    setRounds(updatedRounds);
+  }, []);
 
   return (
     <div className="App">
-        <Top/>
+        <Top getRounds={getRounds}/>
         <HumanChoice getPlayerChoice={getPlayerChoice}/>
+        <p>{Rounds}</p>
         <AiChoice/>
         <Winner/>
     </div>
