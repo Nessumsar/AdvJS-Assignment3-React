@@ -101,14 +101,17 @@ const checkWin = () => {
             playerWins++;
             updateLogString(playerWins, aiWins);
             i++;
+            break;
           case "draw":
             i++;
+            break;
           case "lose":
             aiWins++;
             updateLogString(playerWins, aiWins);
+            break;
         }
 
-        
+        /*
         if(checkWin() === "win"){
           playerWins++
           updateLogString(playerWins, aiWins);
@@ -122,7 +125,7 @@ const checkWin = () => {
         }
         if (i === Rounds) {           
           setCurrentRound(0);
-        }  
+        }  */
 
         if (i <= Rounds) {           
           playGame();           
