@@ -83,6 +83,7 @@ function App() {
           case "lose":
             aiWins++;
             updateLogString(playerWins, aiWins);
+            i++;
             break;
         }
 
