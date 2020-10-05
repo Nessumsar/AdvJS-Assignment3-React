@@ -33,7 +33,7 @@ export default function GenerateButtons(props){
       return (<p>Ditt val: ej valt</p>)
     }
     else{
-      return (<p>Ditt val: {option}</p>)
+      return (<p>Ditt val: {props.PlayerChoice}</p>)
     }
 
   }
