@@ -33,7 +33,9 @@ function App() {
   PlayerChoiceRef.current = PlayerChoice;
 
   //Returnerar win på vinst, lose på förlust, draw på lika,
+  /*
   const checkWin = () =>{
+    console.log(win());
     if(PlayerChoiceRef.current == "ej valt"){
       return false;
     }else if(PlayerChoiceRef.current == AiWeapon){
@@ -53,6 +55,32 @@ function App() {
       return "lose";
     }
  }
+ */
+
+
+const checkWin = () => {
+  
+  switch(PlayerChoiceRef.current){
+    case "sten" : switch(AiWeapon){
+      case "sten" : setPlayerChoice("ej valt"); return "draw";
+      case "sax" : setPlayerChoice("ej valt"); return "win";
+      case "påse" : setPlayerChoice("ej valt"); return "lose";
+    }
+    case "sax" : switch(AiWeapon){
+      case "sten" : setPlayerChoice("ej valt"); return "lose";
+      case "sax" : setPlayerChoice("ej valt"); return "draw";
+      case "påse" : setPlayerChoice("ej valt"); return "win";
+    }
+    case "påse" : switch(AiWeapon){ 
+      case "sten" : setPlayerChoice("ej valt"); return "win";
+      case "sax" : setPlayerChoice("ej valt"); return "lose";
+      case "påse" : setPlayerChoice("ej valt"); return "draw";
+    }
+    default : return false;
+  }
+}
+
+
 
   //Spelmotorn, startar när nya rundor knappas in
   const [CurrentRound, setCurrentRound] = useState(0);
@@ -60,26 +88,39 @@ function App() {
   useEffect(() => {
     let playerWins = 0;
     let aiWins = 0;
-    var i = 1;        
+    var i = 1;   
+
     function playGame() {
       setCurrentRound(i);
 
       setTimeout(function() {
         setCurrentRound(i);
 
-        let control = checkWin()
-        if(control == "win"){
+        switch(checkWin()){
+          case "win":
+            playerWins++;
+            updateLogString(playerWins, aiWins);
+            i++;
+          case "draw":
+            i++;
+          case "lose":
+            aiWins++;
+            updateLogString(playerWins, aiWins);
+        }
+
+        
+        if(checkWin() === "win"){
           playerWins++
           updateLogString(playerWins, aiWins);
           i++
-        }else if(control == "lose"){
+        }else if(checkWin() === "lose"){
           aiWins++
           updateLogString(playerWins, aiWins);
           i++
-        }else if(control == "draw"){
+        }else if(checkWin() === "draw"){
           i++
         }
-        if (i == Rounds) {           
+        if (i === Rounds) {           
           setCurrentRound(0);
         }  
 
