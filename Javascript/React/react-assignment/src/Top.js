@@ -6,7 +6,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 //Start
 //Tid
 
-
 const TopComponent = (props) => {
     const [rounds, setRounds] = useState("0");
 
@@ -15,23 +14,11 @@ const TopComponent = (props) => {
         let time = new Date().getTime;
     }
 
-    function startRounds(rounds){
-        for(let i=0; i++; i<rounds){
-            //spela
-        }
-    }
-
-
-
     //wip
     function startGame(event){
         event.preventDefault();
-        console.log({rounds});
-
         props.getRounds(rounds);
-       
         countTime();
-        startRounds({rounds});
     }
 
     function handleChange(event){
@@ -42,8 +29,9 @@ const TopComponent = (props) => {
     return(
         <div>
             <h1>Sten, sax, påse</h1>
-
-            <div id='seconds-counter'> </div>
+            <div id='seconds-counter'> 
+            
+            </div>
 
             <div className="topbar">
                 <form onSubmit={startGame}>
