@@ -33,32 +33,7 @@ function App() {
   PlayerChoiceRef.current = PlayerChoice;
 
   //Returnerar win på vinst, lose på förlust, draw på lika,
-  /*
-  const checkWin = () =>{
-    console.log(win());
-    if(PlayerChoiceRef.current == "ej valt"){
-      return false;
-    }else if(PlayerChoiceRef.current == AiWeapon){
-      setPlayerChoice("ej valt");
-      return "draw";
-    }else if(PlayerChoiceRef.current == "sten" && AiWeapon == "sax"){
-      setPlayerChoice("ej valt");
-    return "win";
-    }else if(PlayerChoiceRef.current == "påse" && AiWeapon == "sten"){
-      setPlayerChoice("ej valt");
-      return "win";
-    }else if(PlayerChoiceRef.current == "sax" && AiWeapon == "påse"){
-      setPlayerChoice("ej valt");
-      return "win";
-    }else{
-      setPlayerChoice("ej valt");
-      return "lose";
-    }
- }
- */
-
-
-const checkWin = () => {
+  const checkWin = () => {
   
   switch(PlayerChoiceRef.current){
     case "sten" : switch(AiWeapon){
@@ -110,22 +85,6 @@ const checkWin = () => {
             updateLogString(playerWins, aiWins);
             break;
         }
-
-        /*
-        if(checkWin() === "win"){
-          playerWins++
-          updateLogString(playerWins, aiWins);
-          i++
-        }else if(checkWin() === "lose"){
-          aiWins++
-          updateLogString(playerWins, aiWins);
-          i++
-        }else if(checkWin() === "draw"){
-          i++
-        }
-        if (i === Rounds) {           
-          setCurrentRound(0);
-        }  */
 
         if (i <= Rounds) {           
           playGame();           
