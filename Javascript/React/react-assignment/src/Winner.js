@@ -16,11 +16,13 @@ const Winner = (props) => {
 
     function renderList(){   
         return(
-        <ul>
+        <div>
             {items.map((item, index) => {
-                return <li key={index}>{item}</li>
+                return (<ul className="BattleLog">
+                    <li key={index}>{item}</li>
+                </ul>)
             })}
-        </ul>
+        </div>
         );
     }
 

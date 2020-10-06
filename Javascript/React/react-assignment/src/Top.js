@@ -22,7 +22,6 @@ const TopComponent = (props) => {
     }
 
     function handleChange(event){
-        console.log(event.target.value)
         setRounds(event.target.value);
     }
 
