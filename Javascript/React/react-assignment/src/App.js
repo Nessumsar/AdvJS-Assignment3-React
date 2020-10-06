@@ -13,10 +13,10 @@ function App() {
     setPlayerChoice(updatedPlayerChoice);
   }, []);
   
-  const [AiWeapon, setAiWeapon] = useState("sax");
-  /* const getAiChoice = useCallback( (updatedAiChoice) => {
-    setAiChoice(updatedAiChoice);
-  }, []); */
+  const [AiWeapon, setAiWeapon] = useState("ej valt");
+  const getAiWeapon = useCallback( (updatedAiWeapon) => {
+    setAiWeapon(updatedAiWeapon);
+  }, []); 
 
   const [Rounds, setRounds] = useState(0);
   const getRounds = useCallback( (updatedRounds) => {
@@ -28,63 +28,38 @@ function App() {
     setLogString(a + "-" + b)
   }
  
-  //Skapar en muterbar variable av spelarens val som kan updateras i funktioner
+  //Skapar en muterbar variable av valen som kan updateras och användas i funktioner
   const PlayerChoiceRef = useRef();
   PlayerChoiceRef.current = PlayerChoice;
+  const AiWeaponRef = useRef();
+  AiWeaponRef.current = AiWeapon;
 
   //Returnerar win på vinst, lose på förlust, draw på lika,
-  /*
-  const checkWin = () =>{
-    console.log(win());
-    if(PlayerChoiceRef.current == "ej valt"){
-      return false;
-    }else if(PlayerChoiceRef.current == AiWeapon){
-      setPlayerChoice("ej valt");
-      return "draw";
-    }else if(PlayerChoiceRef.current == "sten" && AiWeapon == "sax"){
-      setPlayerChoice("ej valt");
-    return "win";
-    }else if(PlayerChoiceRef.current == "påse" && AiWeapon == "sten"){
-      setPlayerChoice("ej valt");
-      return "win";
-    }else if(PlayerChoiceRef.current == "sax" && AiWeapon == "påse"){
-      setPlayerChoice("ej valt");
-      return "win";
-    }else{
-      setPlayerChoice("ej valt");
-      return "lose";
-    }
- }
- */
-
-
-const checkWin = () => {
+  const checkWin = () => {
   
   switch(PlayerChoiceRef.current){
-    case "sten" : switch(AiWeapon){
-      case "sten" : setPlayerChoice("ej valt"); return "draw";
-      case "sax" : setPlayerChoice("ej valt"); return "win";
-      case "påse" : setPlayerChoice("ej valt"); return "lose";
+    case "sten" : switch(AiWeaponRef.current){
+      case "sten" : setPlayerChoice("ej valt"); setAiWeapon("ej valt"); return "draw";
+      case "sax" : setPlayerChoice("ej valt"); setAiWeapon("ej valt"); return "win";
+      case "påse" : setPlayerChoice("ej valt"); setAiWeapon("ej valt"); return "lose";
     }
-    case "sax" : switch(AiWeapon){
-      case "sten" : setPlayerChoice("ej valt"); return "lose";
-      case "sax" : setPlayerChoice("ej valt"); return "draw";
-      case "påse" : setPlayerChoice("ej valt"); return "win";
+    case "sax" : switch(AiWeaponRef.current){
+      case "sten" : setPlayerChoice("ej valt"); setAiWeapon("ej valt"); return "lose";
+      case "sax" : setPlayerChoice("ej valt"); setAiWeapon("ej valt"); return "draw";
+      case "påse" : setPlayerChoice("ej valt"); setAiWeapon("ej valt"); return "win";
     }
-    case "påse" : switch(AiWeapon){ 
-      case "sten" : setPlayerChoice("ej valt"); return "win";
-      case "sax" : setPlayerChoice("ej valt"); return "lose";
-      case "påse" : setPlayerChoice("ej valt"); return "draw";
+    case "påse" : switch(AiWeaponRef.current){ 
+      case "sten" : setPlayerChoice("ej valt"); setAiWeapon("ej valt"); return "win";
+      case "sax" : setPlayerChoice("ej valt"); setAiWeapon("ej valt"); return "lose";
+      case "påse" : setPlayerChoice("ej valt"); setAiWeapon("ej valt"); return "draw";
     }
     default : return false;
   }
 }
 
-
-
   //Spelmotorn, startar när nya rundor knappas in
   const [CurrentRound, setCurrentRound] = useState(0);
-  
+  const [AskForNewWeapon, setAskForNewWeapon] = useState(0);
   useEffect(() => {
     let playerWins = 0;
     let aiWins = 0;
@@ -95,34 +70,22 @@ const checkWin = () => {
 
       setTimeout(function() {
         setCurrentRound(i);
-
+        
         switch(checkWin()){
           case "win":
             playerWins++;
             updateLogString(playerWins, aiWins);
             i++;
+            break;
           case "draw":
             i++;
+            break;
           case "lose":
             aiWins++;
             updateLogString(playerWins, aiWins);
+            i++;
+            break;
         }
-
-        
-        if(checkWin() === "win"){
-          playerWins++
-          updateLogString(playerWins, aiWins);
-          i++
-        }else if(checkWin() === "lose"){
-          aiWins++
-          updateLogString(playerWins, aiWins);
-          i++
-        }else if(checkWin() === "draw"){
-          i++
-        }
-        if (i === Rounds) {           
-          setCurrentRound(0);
-        }  
 
         if (i <= Rounds) {           
           playGame();           
@@ -135,12 +98,19 @@ const checkWin = () => {
     }
   },[Rounds]);
 
+  //väljer nytt vapen för ai
+  useEffect(() =>{
+    if(PlayerChoice != "ej valt"){
+      setAskForNewWeapon(AskForNewWeapon + 1);
+    }
+  },[PlayerChoice]);
+
   return (
     <div className="App">
         <Top getRounds={getRounds}/>
         <p>Omgång {CurrentRound} / {Rounds}</p>
         <HumanChoice getPlayerChoice={getPlayerChoice} PlayerChoice={PlayerChoice}/>
-        <AiChoice/>
+        <AiChoice getAiWeapon={getAiWeapon} AiWeapon={AiWeapon} AskForNewWeapon={AskForNewWeapon}/>
         <Winner logString={LogString}/>
     </div>
   );
