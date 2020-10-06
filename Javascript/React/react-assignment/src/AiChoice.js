@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './css/AiChoice.css';
 import { useState } from 'react';
 
@@ -23,23 +23,25 @@ const options = [
 
 
 const AiChoice = (props) => {
-    const [option, setOption] = useState(0);
+    const [option, setOption] = useState("0");
 
-    function ifChosen(option){
-        if(option === 0){return (<p>Datorns val: ej valt</p>)}
-
-        else{return (<p>Datorns val: {option}</p>)}
+    function ifChosen(){
+        return (<p>Datorns val: {props.AiWeapon}</p>)
     }
-
 
     function chooseOption(){
-        return (<p>To be continued...</p>)
+        let random = Math.floor(Math.random() * options.length);
+        setOption(options[random].name);
+        props.getAiWeapon(options[random].name);
     }
 
-
+    useEffect(() => {
+        chooseOption();
+    },[props.AskForNewWeapon])
+    
         return(
             <div className="AI-choice">
-                <div>{ifChosen(option)}</div>
+                <div>{ifChosen()}</div>
 
                 <div className="AI-options">
                     {options.map(option => (
