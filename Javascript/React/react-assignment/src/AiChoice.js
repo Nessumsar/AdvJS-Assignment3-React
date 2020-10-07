@@ -28,9 +28,21 @@ const AiChoice = (props) => {
     }
 
     function chooseOption(){
-        let random = Math.floor(Math.random() * options.length);
-        setOption(options[random].name);
-        props.getAiWeapon(options[random].name);
+        let randomOption = options[Math.floor(Math.random() * options.length)].name;
+        setOption(randomOption);
+        props.getAiWeapon(randomOption);
+
+        if(option === randomOption){
+            let isAlive = true;
+            while(isAlive){
+                randomOption = options[Math.floor(Math.random() * options.length)].name;
+                if(option != randomOption){
+                    setOption(randomOption);
+                    props.getAiWeapon(randomOption);
+                    isAlive = false;
+                }
+            }
+        }
     }
 
     useEffect(() => {
