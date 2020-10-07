@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import './css/AiChoice.css';
 import { useState } from 'react';
 
-//Logik och presentation av datorns val
 const options = [
     {
       emoji: '✊',
@@ -21,12 +20,11 @@ const options = [
     }
 ];
 
-
 const AiChoice = (props) => {
-    const [option, setOption] = useState("0");
+    const [option, setOption] = useState(0);
 
     function ifChosen(){
-        return (<p>Datorns val: {props.AiWeapon}</p>)
+        return (<p>Datorns val: {props.AiWeapon}</p>);
     }
 
     function chooseOption(){
@@ -36,29 +34,28 @@ const AiChoice = (props) => {
     }
 
     useEffect(() => {
-        chooseOption();
-    },[props.AskForNewWeapon])
+        if(props.NewAiWeapon > 0){
+            chooseOption();
+        }
+    },[props.NewAiWeapon]);
     
-        return(
-            <div className="AI-choice">
-                <div>{ifChosen()}</div>
+    return(
+        <div className="AI-choice">
+            <div>{ifChosen()}</div>
 
-                <div className="AI-options">
-                    {options.map(option => (
-                        <div key={option.name}>
-                            <div className="AI-emojis">
-                                <span role="img" aria-label={option.name}>{option.emoji}</span>
-                            </div>
+            <div className="AI-options">
+                {options.map(option => (
+                    <div key={option.name}>
+                        <div className="AI-emojis">
+                            <span role="img" aria-label={option.name}>{option.emoji}</span>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
+            </div>
 
-                <div key="AI val och presentation(?) av det skall skrivas här" className={chooseOption}>
-                    
-                </div>
-            </div> 
-        );
+            <div className={chooseOption}></div>
+        </div> 
+    );
 }
-
 
 export default AiChoice;

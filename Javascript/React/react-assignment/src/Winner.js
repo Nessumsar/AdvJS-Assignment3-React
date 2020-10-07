@@ -1,37 +1,46 @@
 import React, { useState } from 'react';
-import { render } from 'react-dom';
 import './css/Winner.css';
 
 
 //Räknar antal omgångar och poäng
 
 const Winner = (props) => {
-    const [logList, setLogList] = useState([]);
-    const items = [];
+    const [logList, setLogList] = useState([]); 
 
+    
     function updateList(){
-        logList.push(props.logString);
-        items.push(props.logString)
+        if(logList.includes(props.logString)){
+            //Gör ingenting för att undvika dubletter
+        }else{
+            logList.push(props.logString)
+        }
     }
 
-    function renderList(){   
-        return(
-        <div>
-            {items.map((item, index) => {
-                return (<ul className="BattleLog">
-                    <li key={index}>{item}</li>
-                </ul>)
-            })}
-        </div>
-        );
+
+    function renderList(){  
+        if(props.resetLog == 1){
+            var emptyList = [];
+            const listItems = emptyList.map((item, index) =>
+            <li key={index}>{item}</li>);
+            
+            return <ul>{listItems}</ul>;
+        }
+        else{
+            const items = logList;
+            const listItems = items.map((item, index) =>
+            <li key={index}>{item}</li>);
+            
+            return <ul>{listItems}</ul>;
+        }  
     }
+
 
     return(
-    <div onLoad={updateList(props)}>
-        <div>
-            {renderList(props)}
+        <div onLoad={updateList(props)}>
+            <div className="log">
+                {renderList(props)}
+            </div>
         </div>
-    </div>
     );
 }
 

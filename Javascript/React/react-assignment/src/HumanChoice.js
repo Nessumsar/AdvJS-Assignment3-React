@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import './css/HumanChoice.css';
 
 const options = [
@@ -20,22 +20,21 @@ const options = [
 ];
 
 export default function GenerateButtons(props){
-  const [option, setOption] = useState("0");
+  const [option, setOption] = useState("ej valt");
   handleChange = handleChange.bind(this);
 
   function handleChange(option) {
     setOption(option.name);
-    props.getPlayerChoice(option.name);
+    props.getHumanWeapon(option.name);
   }
 
   function ifChosen(option){
-    if(option === 0){
+    if(option === "ej valt"){
       return (<p>Ditt val: ej valt</p>)
     }
     else{
-      return (<p>Ditt val: {props.PlayerChoice}</p>)
+      return (<p>Ditt val: {props.HumanWeapon}</p>)
     }
-
   }
 
   return(
