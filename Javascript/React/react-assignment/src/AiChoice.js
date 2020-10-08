@@ -23,10 +23,6 @@ const options = [
 const AiChoice = (props) => {
     const [option, setOption] = useState(0);
 
-    //skriver ut när vapen är valt
-    function ifChosen(){
-        return (<p>Datorns val: {props.AiWeapon}</p>);
-    }
 
     //metod föratt välja vapen
     function chooseOption(){
@@ -57,7 +53,9 @@ const AiChoice = (props) => {
     
     return(
         <div className="AI-choice">
-            <div>{ifChosen()}</div>
+            <div>
+                <p>Datorns val: {props.AiWeapon}</p>
+            </div>
 
             <div className="AI-options">
                 {options.map(option => (

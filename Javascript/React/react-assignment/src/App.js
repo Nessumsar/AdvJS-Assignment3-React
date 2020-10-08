@@ -37,9 +37,9 @@ function App() {
   const [resetLog, setResetLog] = useState(0);
  
 
-  const [WhoWon, setWhoWon] = useState("");
+  const [WhoWon, setWhoWon] = useState(" ");
 
-  //Skapar en muterbar variable av valen som kan updateras och användas i funktioner
+  //Skapar en muterbar variable av valen som kan updateras och användas round funktioner
   const HumanChoiceRef = useRef();
   HumanChoiceRef.current = HumanWeapon;
   const AiWeaponRef = useRef();
@@ -81,42 +81,44 @@ function App() {
   useEffect(() => {
     let humanWins = 0;
     let aiWins = 0;
-    var i = 1;
-    var gameWinner = 0;   
-
+    var round = 1; 
+    var gameWinner = 0;
 
     function playGame() {
-      setCurrentRound(i);
+      setCurrentRound(round);
 
       //Timeout loop för att kolla vem som vinner rundan, körs var tredje sekund fram tills ett resultat finns
       setTimeout(function() {
-        setCurrentRound(i);
+        if(round == 1){ 
+          setResetLog(0);
+        }
+        setCurrentRound(round);
         switch(checkWin()){
           case "win":
             humanWins++;
-              i++;
+              round++;
                 resetChoicesAndUpdateLogString(humanWins, aiWins);
             break;
           case "draw":
             humanWins++;
               aiWins++;
-                i++;
+                round++;
                   resetChoicesAndUpdateLogString(humanWins, aiWins);
             break;
           case "lose":
             aiWins++;
-              i++;
+              round++;
                 resetChoicesAndUpdateLogString(humanWins, aiWins);
             break;
         }
-        if (i <= MaxRounds) {           
+        if (round <= MaxRounds) {           
           playGame();           
         }
         
       }, 3000);
 
-      //Nollställ spel
-      if(MaxRounds == i){
+      //Nollställ spel och bestäm slutgiltig vinnare
+      if(MaxRounds == round){
         setTimeout(function(){
           setMaxRounds(0);
           setCurrentRound(0);
@@ -130,16 +132,15 @@ function App() {
           }else{
             gameWinner = "Oavgjort!";
           }
-          setWhoWon(gameWinner)
 
           //Nollställ log
           setTimeout(function(){
-            if(gameWinner != ""){
+            if(gameWinner != 0){
               setResetLog(1);
             }
           }, 3000);
 
-          setResetLog(0);
+         
         }, 3500);  
       }
     }
