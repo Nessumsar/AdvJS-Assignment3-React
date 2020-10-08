@@ -16,7 +16,8 @@ const Winner = (props) => {
         }
     }
 
-
+    //Renderar en tom lista om renderLog är 1
+    //Renderar annars en lista med poängställning
     function renderList(){  
         if(props.resetLog == 1){
             const emptyList = []
