@@ -37,6 +37,8 @@ function App() {
   const [resetLog, setResetLog] = useState(0);
  
 
+  const [WhoWon, setWhoWon] = useState("");
+
   //Skapar en muterbar variable av valen som kan updateras och användas i funktioner
   const HumanChoiceRef = useRef();
   HumanChoiceRef.current = HumanWeapon;
@@ -119,25 +121,20 @@ function App() {
           setAiWeapon("ej valt");
 
           if(humanWins > aiWins){
-            gameWinner = "Human";
+            gameWinner = "Du vann!";
           }else if(humanWins < aiWins){
-            gameWinner = "AI";
+            gameWinner = "Datorn vann!";
           }else{
-            gameWinner = "Draw";
+            gameWinner = "Oavgjort!";
           }
-          
+          setWhoWon(gameWinner)
+
           //reset av battlelog
           setTimeout(function(){
-            if(gameWinner != 0){
+            if(gameWinner != ""){
               setResetLog(1);
             }
           }, 3000);
-          
-
-          //skriv ut något för att presentera vem som vann spelet
-
-          
-          //reset på gamewinner
 
           setResetLog(0);
         }, 3500);  
@@ -162,6 +159,7 @@ function App() {
     <div className="App">
         <Top getRounds={getRounds} MaxRounds={MaxRounds}/>
         <p>Omgång {CurrentRound} / {MaxRounds}</p>
+        <p>Vinnare: {WhoWon}</p>
         <HumanChoice getHumanWeapon={getHumanWeapon} HumanWeapon={HumanWeapon}/>
         <AiChoice getAiWeapon={getAiWeapon} AiWeapon={AiWeapon} NewAiWeapon={NewAiWeapon}/>
         <Winner logString={LogString} resetLog={resetLog}/>
