@@ -131,11 +131,15 @@ function App() {
             if(gameWinner != 0){
               setResetLog(1);
             }
-          }, 3000)
+          }, 3000);
+          
 
           //skriv ut något för att presentera vem som vann spelet
 
+          
           //reset på gamewinner
+
+          setResetLog(0);
         }, 3500);  
       }
     }

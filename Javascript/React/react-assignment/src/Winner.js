@@ -6,8 +6,8 @@ import './css/Winner.css';
 
 const Winner = (props) => {
     const [logList, setLogList] = useState([]); 
+   
 
-    
     function updateList(){
         if(logList.includes(props.logString)){
             //Gör ingenting för att undvika dubletter
@@ -19,10 +19,11 @@ const Winner = (props) => {
 
     function renderList(){  
         if(props.resetLog == 1){
-            var emptyList = [];
+            const emptyList = []
             const listItems = emptyList.map((item, index) =>
             <li key={index}>{item}</li>);
-            
+            console.log(emptyList.length);
+
             return <ul>{listItems}</ul>;
         }
         else{
@@ -31,7 +32,7 @@ const Winner = (props) => {
             <li key={index}>{item}</li>);
             
             return <ul>{listItems}</ul>;
-        }  
+        }
     }
 
 
