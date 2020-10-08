@@ -32,6 +32,7 @@ const AiChoice = (props) => {
         setOption(randomOption);
         props.getAiWeapon(randomOption);
 
+        //Förhindrar så att datorn inte kan välja samma vapen två ggr irad
         if(option === randomOption){
             let isAlive = true;
             while(isAlive){
