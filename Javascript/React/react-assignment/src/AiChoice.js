@@ -23,15 +23,18 @@ const options = [
 const AiChoice = (props) => {
     const [option, setOption] = useState(0);
 
+    //skriver ut när vapen är valt
     function ifChosen(){
         return (<p>Datorns val: {props.AiWeapon}</p>);
     }
 
+    //metod föratt välja vapen
     function chooseOption(){
         let randomOption = options[Math.floor(Math.random() * options.length)].name;
         setOption(randomOption);
         props.getAiWeapon(randomOption);
 
+        //Förhindrar så att datorn inte kan välja samma vapen två ggr irad
         if(option === randomOption){
             let isAlive = true;
             while(isAlive){
@@ -44,7 +47,8 @@ const AiChoice = (props) => {
             }
         }
     }
-
+    
+    //Väljer nytt vapen när propsen ändras
     useEffect(() => {
         if(props.NewAiWeapon > 0){
             chooseOption();
