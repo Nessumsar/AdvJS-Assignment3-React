@@ -67,6 +67,7 @@ function App() {
   }
 
 
+  //Resettar spelet och skriver ut resultat
   function resetChoicesAndUpdateLogString(humanWins, aiWins){
     updateLogString(HumanChoiceRef.current + "   |   " + humanWins + " - " + aiWins + "   |   " + AiWeaponRef.current);
     setHumanWeapon("ej valt"); 
@@ -74,6 +75,7 @@ function App() {
   }
 
 
+  //Spelmotorn, körs så fort en mängd rundor har matats in av användaren
   useEffect(() => {
     let humanWins = 0;
     let aiWins = 0;
@@ -84,6 +86,7 @@ function App() {
     function playGame() {
       setCurrentRound(i);
 
+      //Timeout loop för att kolla vem som vinner rundan, körs var tredje sekund fram tills ett resultat finns
       setTimeout(function() {
         setCurrentRound(i);
         switch(checkWin()){
@@ -151,6 +154,7 @@ function App() {
   },[MaxRounds]);
 
 
+  //Väljer nytt vapen åt datorn så fort spelarens vapen är valt
   useEffect(() => {
     if(HumanWeapon != "ej valt"){
       setNewAiWeapon(NewAiWeapon + 1);
