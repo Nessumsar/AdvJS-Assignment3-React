@@ -23,11 +23,13 @@ export default function GenerateButtons(props){
   const [option, setOption] = useState("ej valt");
   handleChange = handleChange.bind(this);
 
+  //Skicka alternativ upp till App.js
   function handleChange(option) {
     setOption(option.name);
     props.getHumanWeapon(option.name);
   }
 
+  //Skriv ut spelarens val
   function ifChosen(option){
     if(option === "ej valt"){
       return (<p>Ditt val: ej valt</p>)

@@ -5,7 +5,7 @@ const TopComponent = (props) => {
     const [rounds, setRounds] = useState(0);
     const [seconds, setSeconds] = useState(0);
 
-
+    //Räknar sekunder när man startar spelet och slutar räkna när spelet är över.
     useEffect(() =>{
         if(props.MaxRounds == 0){
             setSeconds(0);
@@ -15,7 +15,7 @@ const TopComponent = (props) => {
         }
     }, [seconds])
 
-
+    //Skicka ronder till App.js som startar spelet
     function startGameAndTimer(event){
         event.preventDefault();
         setSeconds(seconds+1);

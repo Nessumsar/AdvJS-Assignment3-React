@@ -115,7 +115,7 @@ function App() {
         
       }, 3000);
 
-      //reset
+      //Nollställ spel
       if(MaxRounds == i){
         setTimeout(function(){
           setMaxRounds(0);
@@ -132,7 +132,7 @@ function App() {
           }
           setWhoWon(gameWinner)
 
-          //reset av battlelog
+          //Nollställ log
           setTimeout(function(){
             if(gameWinner != ""){
               setResetLog(1);
